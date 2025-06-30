@@ -108,6 +108,159 @@ export const mockProducts: Product[] = [
       { id: 's17', name: 'TeknoMart', rating: 4.2, reviewCount: 567, price: 16800, shipping: 'Ücretsiz kargo', inStock: true },
       { id: 's18', name: 'PhonePlus', rating: 3.4, reviewCount: 89, price: 16300, shipping: '35 TL kargo', inStock: true },
     ]
+  },
+  {
+    id: '7',
+    name: 'Realme GT 6 256GB',
+    price: 12999,
+    originalPrice: 14500,
+    image: 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg',
+    category: 'cep telefonu',
+    brand: 'Realme',
+    rating: 4.2,
+    reviewCount: 210,
+    description: 'Realme GT 6, yüksek performanslı işlemcisi ve hızlı şarjı ile.',
+    features: ['6.7" AMOLED ekran', 'Snapdragon 7+ Gen 2', '64MP kamera', '80W hızlı şarj'],
+    sellers: [
+      { id: 's19', name: 'RealmeStore', rating: 4.0, reviewCount: 120, price: 12999, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's20', name: 'CepMarket', rating: 3.9, reviewCount: 98, price: 13200, shipping: '25 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '8',
+    name: 'Oppo Reno 11 128GB',
+    price: 11999,
+    originalPrice: 13500,
+    image: 'https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg',
+    category: 'cep telefonu',
+    brand: 'Oppo',
+    rating: 4.1,
+    reviewCount: 180,
+    description: 'Oppo Reno 11, şık tasarım ve güçlü kamera özellikleri ile.',
+    features: ['6.4" AMOLED ekran', 'MediaTek Dimensity 900', '50MP kamera', '65W hızlı şarj'],
+    sellers: [
+      { id: 's21', name: 'OppoShop', rating: 4.2, reviewCount: 110, price: 11999, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's22', name: 'TelefonSepeti', rating: 3.8, reviewCount: 70, price: 12200, shipping: '20 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '9',
+    name: 'Vivo V30 256GB',
+    price: 13999,
+    originalPrice: 15000,
+    image: 'https://images.pexels.com/photos/341523/pexels-photo-341523.jpeg',
+    category: 'cep telefonu',
+    brand: 'Vivo',
+    rating: 4.0,
+    reviewCount: 150,
+    description: 'Vivo V30, uzun pil ömrü ve geniş ekranı ile.',
+    features: ['6.78" AMOLED ekran', 'Snapdragon 778G', '64MP kamera', '44W hızlı şarj'],
+    sellers: [
+      { id: 's23', name: 'VivoMağaza', rating: 4.1, reviewCount: 80, price: 13999, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's24', name: 'MobilFırsat', rating: 3.7, reviewCount: 60, price: 14200, shipping: '30 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '10',
+    name: 'Tecno Camon 20 Pro',
+    price: 10999,
+    originalPrice: 12000,
+    image: 'https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg',
+    category: 'cep telefonu',
+    brand: 'Tecno',
+    rating: 3.9,
+    reviewCount: 90,
+    description: 'Tecno Camon 20 Pro, uygun fiyatlı ve güçlü kamera performansı.',
+    features: ['6.67" IPS LCD', 'Helio G99', '64MP kamera', '33W hızlı şarj'],
+    sellers: [
+      { id: 's25', name: 'TecnoStore', rating: 3.8, reviewCount: 40, price: 10999, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's26', name: 'CepDükkanı', rating: 3.6, reviewCount: 30, price: 11200, shipping: '15 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '11',
+    name: 'POCO X6 Pro 256GB',
+    price: 14499,
+    originalPrice: 15500,
+    image: 'https://images.pexels.com/photos/461389/pexels-photo-461389.jpeg',
+    category: 'cep telefonu',
+    brand: 'POCO',
+    rating: 4.3,
+    reviewCount: 130,
+    description: 'POCO X6 Pro, yüksek performans ve uygun fiyatı bir arada sunar.',
+    features: ['6.67" AMOLED ekran', 'Dimensity 8300 Ultra', '64MP kamera', '67W hızlı şarj'],
+    sellers: [
+      { id: 's27', name: 'PocoMağaza', rating: 4.2, reviewCount: 60, price: 14499, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's28', name: 'FırsatTelefon', rating: 4.0, reviewCount: 50, price: 14700, shipping: '20 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '12',
+    name: 'Honor 90 Lite 128GB',
+    price: 10499,
+    originalPrice: 11500,
+    image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg',
+    category: 'cep telefonu',
+    brand: 'Honor',
+    rating: 3.8,
+    reviewCount: 75,
+    description: 'Honor 90 Lite, hafif tasarım ve uzun pil ömrü ile.',
+    features: ['6.7" LCD ekran', 'Dimensity 6020', '100MP kamera', '22.5W hızlı şarj'],
+    sellers: [
+      { id: 's29', name: 'HonorStore', rating: 3.9, reviewCount: 35, price: 10499, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's30', name: 'CepAvantaj', rating: 3.7, reviewCount: 25, price: 10700, shipping: '10 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '13',
+    name: 'Infinix Note 30 256GB',
+    price: 11499,
+    originalPrice: 12500,
+    image: 'https://images.pexels.com/photos/461389/pexels-photo-461389.jpeg',
+    category: 'cep telefonu',
+    brand: 'Infinix',
+    rating: 3.7,
+    reviewCount: 60,
+    description: 'Infinix Note 30, geniş ekranı ve uygun fiyatı ile.',
+    features: ['6.78" IPS LCD', 'Helio G99', '64MP kamera', '45W hızlı şarj'],
+    sellers: [
+      { id: 's31', name: 'InfinixMağaza', rating: 3.8, reviewCount: 20, price: 11499, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's32', name: 'TelefonExpress', rating: 3.6, reviewCount: 15, price: 11700, shipping: '15 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '14',
+    name: 'Motorola Edge 40 Neo',
+    price: 13499,
+    originalPrice: 14500,
+    image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg',
+    category: 'cep telefonu',
+    brand: 'Motorola',
+    rating: 4.0,
+    reviewCount: 85,
+    description: 'Motorola Edge 40 Neo, suya dayanıklı tasarım ve hızlı şarj.',
+    features: ['6.55" pOLED ekran', 'Dimensity 7030', '50MP kamera', '68W hızlı şarj'],
+    sellers: [
+      { id: 's33', name: 'MotoStore', rating: 4.1, reviewCount: 40, price: 13499, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's34', name: 'CepFırsat', rating: 3.9, reviewCount: 30, price: 13700, shipping: '20 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '15',
+    name: 'TCL 40 SE 256GB',
+    price: 10999,
+    originalPrice: 12000,
+    image: 'https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg',
+    category: 'cep telefonu',
+    brand: 'TCL',
+    rating: 3.6,
+    reviewCount: 55,
+    description: 'TCL 40 SE, uygun fiyatlı ve geniş depolama alanı.',
+    features: ['6.75" IPS LCD', 'Helio G37', '50MP kamera', '18W hızlı şarj'],
+    sellers: [
+      { id: 's35', name: 'TCLMağaza', rating: 3.7, reviewCount: 20, price: 10999, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's36', name: 'TelefonPazarı', rating: 3.5, reviewCount: 15, price: 11200, shipping: '10 TL kargo', inStock: true }
+    ]
   }
 ];
 
