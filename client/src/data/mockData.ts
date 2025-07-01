@@ -261,6 +261,91 @@ export const mockProducts: Product[] = [
       { id: 's35', name: 'TCLMağaza', rating: 3.7, reviewCount: 20, price: 10999, shipping: 'Ücretsiz kargo', inStock: true },
       { id: 's36', name: 'TelefonPazarı', rating: 3.5, reviewCount: 15, price: 11200, shipping: '10 TL kargo', inStock: true }
     ]
+  },
+  {
+    id: '16',
+    name: 'General Mobile GM 24 128GB',
+    price: 8999,
+    originalPrice: 9999,
+    image: 'https://images.pexels.com/photos/267394/pexels-photo-267394.jpeg',
+    category: 'cep telefonu',
+    brand: 'General Mobile',
+    rating: 3.7,
+    reviewCount: 45,
+    description: 'General Mobile GM 24, uygun fiyatlı ve günlük kullanım için ideal.',
+    features: ['6.52" IPS LCD', 'Unisoc T610', '50MP kamera', '18W hızlı şarj'],
+    sellers: [
+      { id: 's37', name: 'GMStore', rating: 3.8, reviewCount: 20, price: 8999, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's38', name: 'CepFırsat', rating: 3.6, reviewCount: 10, price: 9200, shipping: '10 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '17',
+    name: 'Reeder S23 128GB',
+    price: 7499,
+    originalPrice: 8500,
+    image: 'https://images.pexels.com/photos/276528/pexels-photo-276528.jpeg',
+    category: 'cep telefonu',
+    brand: 'Reeder',
+    rating: 3.5,
+    reviewCount: 30,
+    description: 'Reeder S23, uygun fiyatı ve temel özellikleriyle öne çıkar.',
+    features: ['6.5" IPS LCD', 'Unisoc SC9863A', '13MP kamera', '10W şarj'],
+    sellers: [
+      { id: 's39', name: 'ReederMağaza', rating: 3.7, reviewCount: 12, price: 7499, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's40', name: 'TelefonExpress', rating: 3.4, reviewCount: 8, price: 7700, shipping: '10 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '18',
+    name: 'Casper VIA X30 Plus',
+    price: 9799,
+    originalPrice: 10500,
+    image: 'https://images.pexels.com/photos/404280/pexels-photo-404280.jpeg',
+    category: 'cep telefonu',
+    brand: 'Casper',
+    rating: 3.8,
+    reviewCount: 28,
+    description: 'Casper VIA X30 Plus, geniş ekranı ve uygun fiyatı ile.',
+    features: ['6.5" IPS LCD', 'Helio G80', '48MP kamera', '18W hızlı şarj'],
+    sellers: [
+      { id: 's41', name: 'CasperStore', rating: 3.9, reviewCount: 10, price: 9799, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's42', name: 'CepAvantaj', rating: 3.7, reviewCount: 6, price: 9900, shipping: '10 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '19',
+    name: 'Vestel Venus V7 64GB',
+    price: 6999,
+    originalPrice: 7999,
+    image: 'https://images.pexels.com/photos/325153/pexels-photo-325153.jpeg',
+    category: 'cep telefonu',
+    brand: 'Vestel',
+    rating: 3.4,
+    reviewCount: 18,
+    description: 'Vestel Venus V7, uygun fiyatlı ve yerli üretim bir akıllı telefon.',
+    features: ['6.2" IPS LCD', 'Snapdragon 450', '13MP kamera', '10W şarj'],
+    sellers: [
+      { id: 's43', name: 'VestelShop', rating: 3.5, reviewCount: 7, price: 6999, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's44', name: 'TelefonPazarı', rating: 3.3, reviewCount: 4, price: 7200, shipping: '10 TL kargo', inStock: true }
+    ]
+  },
+  {
+    id: '20',
+    name: 'TCL 30 SE 128GB',
+    price: 9599,
+    originalPrice: 10500,
+    image: 'https://images.pexels.com/photos/341523/pexels-photo-341523.jpeg',
+    category: 'cep telefonu',
+    brand: 'TCL',
+    rating: 3.6,
+    reviewCount: 22,
+    description: 'TCL 30 SE, uygun fiyatlı ve geniş depolama alanı.',
+    features: ['6.52" IPS LCD', 'Helio G25', '50MP kamera', '15W hızlı şarj'],
+    sellers: [
+      { id: 's45', name: 'TCLMağaza', rating: 3.7, reviewCount: 8, price: 9599, shipping: 'Ücretsiz kargo', inStock: true },
+      { id: 's46', name: 'CepMarket', rating: 3.5, reviewCount: 5, price: 9700, shipping: '10 TL kargo', inStock: true }
+    ]
   }
 ];
 
