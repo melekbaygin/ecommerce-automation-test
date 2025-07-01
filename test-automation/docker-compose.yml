@@ -1,0 +1,23 @@
+version: '3.8'
+
+services:
+  mock-server:
+    image: wiremock/wiremock:2.35.0
+    ports:
+      - "8080:8080"
+    command: --root-dir /home/wiremock --verbose
+
+  test-runner:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      BROWSER: chrome
+      MOCK_API_URL: http://mock-server:8080
+    volumes:
+      - .:/app
+      - ./target/allure-results:/app/target/allure-results
+      - ./screenshots:/app/screenshots
+    depends_on:
+      - mock-server
+    command: mvn clean test
