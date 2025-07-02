@@ -8,7 +8,13 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = {
             "src/test/java/features/1-KullaniciGirisKontrol.feature",
-            "src/test/java/features/2-HataliGiris.feature",
+//            "src/test/java/features/2-UrunListelemeveGoruntuleme.feature",
+//            "src/test/java/features/3-FiltrelemeIslemleri.feature",
+//            "src/test/java/features/4-SepetIslemleri.feature",
+//            "src/test/java/features/5-SepetGoruntulemeveSilme.feature",
+//            "src/test/java/features/6-UrunSiralama.feature",
+//            "src/test/java/features/7-FormveValidasyon.feature",
+//            "src/test/java/features/8-GuvenlikveYetkilendirme.feature"
 
     },
     glue = "steps",
