@@ -16,8 +16,14 @@ const LoginForm: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError('');
-    setIsLoading(true);
 
+    // E-posta ve şifre boşsa özel hata mesajı göster
+    if (!email || !password) {
+      setError('E-posta ve şifre girilmesi zorunludur');
+      return;
+    }
+
+    setIsLoading(true);
     try {
       const success = await login(email, password);
       if (success) {
@@ -47,7 +53,7 @@ const LoginForm: React.FC = () => {
           </p>
         </div>
 
-        <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+        <form className="mt-8 space-y-6" onSubmit={handleSubmit} noValidate>
           <div className="bg-white p-8 rounded-xl shadow-lg space-y-6">
             {error && (
               <div

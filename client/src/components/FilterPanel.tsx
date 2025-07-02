@@ -26,6 +26,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, onC
       {/* Mobile Filter Button */}
       <div className="lg:hidden mb-4">
         <button
+          id="mobile-filter-open-btn"
           onClick={() => setIsOpen(true)}
           className="flex items-center space-x-2 px-4 py-2 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
         >
@@ -52,6 +53,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, onC
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="text-lg font-semibold">Filtreler</h3>
               <button
+                id="mobile-filter-close-btn"
                 onClick={() => setIsOpen(false)}
                 className="p-2 hover:bg-gray-100 rounded-lg"
               >
@@ -67,6 +69,7 @@ const FilterPanel: React.FC<FilterPanelProps> = ({ filters, onFiltersChange, onC
                 brands={brands}
               />
               <button
+                id="mobile-filter-apply-btn"
                 onClick={() => setIsOpen(false)}
                 className="w-full mt-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
               >
@@ -100,6 +103,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
       <div className="flex items-center justify-between">
         <h3 className="text-lg font-semibold text-gray-900">Filtreler</h3>
         <button
+          id="filter-clear-btn"
           onClick={onClearFilters}
           className="text-sm text-blue-600 hover:text-blue-700"
         >
@@ -135,6 +139,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
           {/* Quick Price Ranges */}
           <div className="space-y-2">
             <button
+              id="price-range-0-10000-btn"
               onClick={() => setPriceRange(0, 10000)}
               data-testid="price-range-0-10000"
               className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
@@ -142,6 +147,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
               0 - 10.000 TL
             </button>
             <button
+              id="price-range-10000-15000-btn"
               onClick={() => setPriceRange(10000, 15000)}
               data-testid="price-range-10000-15000"
               className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
@@ -149,6 +155,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
               10.000 - 15.000 TL
             </button>
             <button
+              id="price-range-15000-20000-btn"
               onClick={() => setPriceRange(15000, 20000)}
               data-testid="price-range-15000-20000"
               className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
@@ -156,6 +163,7 @@ const FilterContent: React.FC<FilterContentProps> = ({
               15.000 - 20.000 TL
             </button>
             <button
+              id="price-range-20000-30000-btn"
               onClick={() => setPriceRange(20000, 30000)}
               data-testid="price-range-20000-30000"
               className="block w-full text-left px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 rounded-md"
