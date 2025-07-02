@@ -4,13 +4,11 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 import utilities.DriverFactory;
 
 import pages.LoginPage;
-
+import pages.HomePage;
 import static org.junit.Assert.assertTrue;
 
 public class KullaniciGirisKontrol {
@@ -42,4 +40,14 @@ public class KullaniciGirisKontrol {
     public void ana_sayfa_görüntülenir() {
         assertTrue(loginPace.isHomePageVisible());
     }
+    @Then("Giriş başarısız olur ve hata mesajı görüntülenir")
+    public void giriş_başarısız_olur_ve_hata_mesajı_görüntülenir() {
+        assertTrue(loginPace.isLoginErrorMesageShow());
+    }
+    @When("Şifre alanına {string} yazar ve giriş yapar")
+    public void şifre_alanına_yazar_ve_giriş_yapar(String password) {
+        loginPace.enterPassword(password);
+        loginPace.submitLogin();
+    }
+
 }
