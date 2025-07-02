@@ -9,15 +9,12 @@ public class LoginPage extends BasePage {
     private final By loginButton = By.id("login-link");
     private final By logoutButton = By.id("logout-button");
     private final By loginSubmit = By.id("login-submit");
+    private final By loginErrorMsg = By.id("login-error");
 
     public LoginPage(WebDriver driver) {
         super(driver);
         this.url = "http://localhost:5173";
     }
-
-//    public void load() {
-//        driver.get(url);
-//    }
 
     public void clickLoginLink() {
         click(loginButton);
@@ -37,5 +34,9 @@ public class LoginPage extends BasePage {
 
     public boolean isHomePageVisible() {
         return isDisplayed(logoutButton);
+    }
+
+    public boolean isLoginErrorMesageShow() {
+        return isDisplayed(loginErrorMsg);
     }
 }

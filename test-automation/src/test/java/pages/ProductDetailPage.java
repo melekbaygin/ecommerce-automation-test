@@ -8,6 +8,7 @@ public class ProductDetailPage extends BasePage {
 
     public ProductDetailPage(WebDriver driver) {
         super(driver);
+        this.url = "http://localhost:5173";
     }
 
     public void addToCart() {

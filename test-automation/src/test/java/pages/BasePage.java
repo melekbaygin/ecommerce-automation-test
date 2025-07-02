@@ -12,6 +12,9 @@ public abstract class BasePage {
         this.driver = driver;
     }
 
+    protected BasePage() {
+    }
+
     public void click(By locator) {
         driver.findElement(locator).click();
     }
