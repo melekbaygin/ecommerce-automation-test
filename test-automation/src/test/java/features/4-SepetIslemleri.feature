@@ -1,15 +1,14 @@
-Feature: Sepete Ürün Ekleme
+Feature: Sepete Urun Ekleme
 
-  Scenario: Ürün sepete eklenir
-    Given Kullanıcı ürün detay sayfasındadır
-    When Sepete ekle butonuna tıklar
-    Then Ürün sepete eklenir ve onay mesajı görünür
-
-  Scenario: Aynı ürün birden fazla kez eklenebilir
-    When Kullanıcı bir ürünü 3 kez sepete ekler
-    Then Sepette o ürün 3 adet görünür
-
-  Scenario: Sepete eklemeden önce login uyarısı
-    Given Kullanıcı giriş yapmamıştır
-    When Sepete ekle butonuna tıklar
-    Then "Giriş yapmalısınız" uyarısı çıkar
+  Scenario: Urun sepete basari ile eklenir
+    Given "http://localhost:5173" e-ticaret sitesine gidilir
+    When Giris yap butonuna tiklanir
+    And E-posta adresi alanina tiklanir ve "test@example.com" yazilir
+    And Sifre alanina tiklanir ve "123456" yazilir
+    And Cep telefonlarini incele butonuna tiklanir
+    And Filtreler kisminin altinda bulunan min bolumune tiklanir ve 15000 degeri girilir
+    And Filtreler kisminin altinda bulunan max bolumune tiklanir ve 20000 degeri girilir
+    And Filtreleri uygula butonuna tiklanir
+    And Cikan sonuctan en alt satirdan rastgele bir urun secilir
+    And En dusuk puanli saticinin urunu sepete eklenir
+    Then Urunun sepete dogru eklendigi kontrol edilir

@@ -3,6 +3,10 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public abstract class BasePage {
     protected WebDriver driver;
@@ -18,7 +22,12 @@ public abstract class BasePage {
     public void click(By locator) {
         driver.findElement(locator).click();
     }
+    public void clickWhenVisible(By locator, int timeoutSeconds) {
 
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(timeoutSeconds));
+        WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+        element.click();
+    }
     public void type(By locator, String text) {
         driver.findElement(locator).sendKeys(text);
     }
