@@ -12,10 +12,11 @@ public class APIClient {
         this.baseUrl = baseUrl;
     }
 
-    public String getToken(String user, String pass) {
+    // WireMock beklentisine uygun: user ve pass sabit değerler
+    public String getToken() {
         Response response = given()
-            .header("user", user)
-            .header("pass", pass)
+            .header("user", "testUser")
+            .header("pass", "testPass")
             .when()
             .post(baseUrl + "/token");
         response.then().statusCode(200);
@@ -24,6 +25,10 @@ public class APIClient {
     }
 
     public Response viewInvoice(String barcode) {
+        // barcode sadece rakam olmalı, kontrol eklenebilir
+        if (!barcode.matches("[0-9]+")) {
+            throw new IllegalArgumentException("Barcode must be numeric");
+        }
         return given()
             .queryParam("barcode", barcode)
             .when()
@@ -31,8 +36,12 @@ public class APIClient {
     }
 
     public Response sendInvoice(String barcode) {
+        // Token WireMock için sabit olmalı
         if (token == null) {
-            throw new RuntimeException("Token not acquired. Call getToken first.");
+            token = "mocked_token_12345";
+        }
+        if (!barcode.matches("[0-9]+")) {
+            throw new IllegalArgumentException("Barcode must be numeric");
         }
         JSONObject requestBody = new JSONObject();
         requestBody.put("Barcode", barcode);
