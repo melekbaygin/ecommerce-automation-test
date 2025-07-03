@@ -15,14 +15,15 @@ const ProductDetail: React.FC = () => {
   const [product, setProduct] = useState<Product | null>(null);
   const [selectedSeller, setSelectedSeller] = useState<Seller | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [favorite, setFavorite] = useState(false);
 
   useEffect(() => {
     const foundProduct = mockProducts.find(p => p.id === id);
     if (foundProduct) {
       setProduct(foundProduct);
-      // Sort sellers by rating (ascending) to get lowest rated first
+      // Satıcıları puana göre artan sırala (en düşük puanlı en başta)
       const sortedSellers = [...foundProduct.sellers].sort((a, b) => a.rating - b.rating);
-      setSelectedSeller(sortedSellers[0]); // Set lowest rated seller as default
+      setSelectedSeller(sortedSellers[0]); // En düşük puanlı satıcıyı seç
     }
   }, [id]);
 
@@ -39,6 +40,16 @@ const ProductDetail: React.FC = () => {
         setIsLoading(false);
       }, 500);
     }
+  };
+
+  // Favorilere ekle fonksiyonu
+  const handleAddToFavorites = () => {
+    if (!isAuthenticated) {
+      navigate('/login');
+      return;
+    }
+    setFavorite(true);
+    // Burada gerçek favorilere ekleme işlemi yapılabilir (API çağrısı vs.)
   };
 
   const formatPrice = (price: number) => {
@@ -120,7 +131,7 @@ const ProductDetail: React.FC = () => {
                     <div
                       key={seller.id}
                       data-testid={`seller-option-${seller.id}`}
-                      className={`p-4 border rounded-lg cursor-pointer transition-colors ${
+                      className={`satici p-4 border rounded-lg cursor-pointer transition-colors ${
                         selectedSeller?.id === seller.id
                           ? 'border-blue-500 bg-blue-50'
                           : 'border-gray-200 hover:border-gray-300'
@@ -131,7 +142,7 @@ const ProductDetail: React.FC = () => {
                         <div>
                           <div className="font-medium text-gray-900">{seller.name}</div>
                           <div className="flex items-center space-x-2 mt-1">
-                            <div className="flex items-center">
+                            <div className="flex items-center satici-puan">
                               <Star className="h-4 w-4 text-yellow-400 fill-current" />
                               <span className="ml-1 text-sm text-gray-600">{seller.rating}</span>
                             </div>
@@ -149,6 +160,21 @@ const ProductDetail: React.FC = () => {
                           <div className="text-sm text-green-600">
                             {seller.inStock ? 'Stokta var' : 'Stokta yok'}
                           </div>
+                          <button
+                            className="sepete-ekle-btn mt-2 px-3 py-1 bg-blue-600 text-white rounded hover:bg-blue-700 disabled:opacity-50 disabled:cursor-not-allowed"
+                            disabled={!seller.inStock}
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              if (!isAuthenticated) { navigate('/login'); return; }
+                              setIsLoading(true);
+                              setTimeout(() => {
+                                addToCart(product, seller);
+                                setIsLoading(false);
+                              }, 500);
+                            }}
+                          >
+                            Sepete Ekle
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -172,9 +198,15 @@ const ProductDetail: React.FC = () => {
                 </button>
 
                 <div className="flex space-x-4">
-                  <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
+                  <button 
+                    className={`flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors ${favorite ? 'bg-yellow-100 border-yellow-400 text-yellow-700' : ''}`}
+                    id="add-to-favorites-btn"
+                    onClick={handleAddToFavorites}
+                    data-testid="add-to-favorites-btn"
+                    disabled={favorite}
+                  >
                     <Heart className="h-5 w-5" />
-                    <span>Favorilere Ekle</span>
+                    <span>{favorite ? 'Favorilere Eklendi' : 'Favorilere Ekle'}</span>
                   </button>
                   <button className="flex items-center space-x-2 px-4 py-2 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors">
                     <Share2 className="h-5 w-5" />

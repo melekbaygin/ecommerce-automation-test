@@ -59,12 +59,13 @@ const Cart: React.FC = () => {
           </div>
 
           <div className="p-6">
-            <div className="space-y-6">
+            <div className="space-y-6" id="cart-items-list">
               {items.map((item) => (
                 <div
                   key={item.productId}
                   data-testid={`cart-item-${item.productId}`}
-                  className="flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 p-4 border border-gray-200 rounded-lg"
+                  id={`cart-item-${item.productId}`}
+                  className="cart-item flex flex-col sm:flex-row items-start sm:items-center space-y-4 sm:space-y-0 sm:space-x-6 p-4 border border-gray-200 rounded-lg"
                 >
                   <img
                     src={item.product.image}
@@ -73,15 +74,9 @@ const Cart: React.FC = () => {
                   />
                   
                   <div className="flex-1">
-                    <h3 className="text-lg font-semibold text-gray-900">
-                      {item.product.name}
-                    </h3>
-                    <p className="text-sm text-gray-600 mt-1">
-                      Satıcı: {item.seller.name}
-                    </p>
-                    <p className="text-lg font-bold text-gray-900 mt-2">
-                      {formatPrice(item.seller.price)}
-                    </p>
+                    <h3 className="text-lg font-semibold text-gray-900 cart-item-name" id={`cart-item-name-${item.productId}`}>{item.product.name}</h3>
+                    <p className="text-sm text-gray-600 mt-1 cart-item-seller" id={`cart-item-seller-${item.productId}`}>Satıcı: {item.seller.name}</p>
+                    <p className="text-lg font-bold text-gray-900 mt-2 cart-item-price" id={`cart-item-price-${item.productId}`}>{formatPrice(item.seller.price)}</p>
                   </div>
 
                   <div className="flex items-center space-x-4">
@@ -94,7 +89,8 @@ const Cart: React.FC = () => {
                         <Minus className="h-4 w-4" />
                       </button>
                       <span 
-                        className="px-3 py-1 bg-gray-100 rounded-md font-medium"
+                        className="px-3 py-1 bg-gray-100 rounded-md font-medium cart-item-quantity"
+                        id={`cart-item-quantity-${item.productId}`}
                         data-testid={`quantity-${item.productId}`}
                       >
                         {item.quantity}
@@ -111,7 +107,8 @@ const Cart: React.FC = () => {
                     <button
                       onClick={() => removeFromCart(item.productId)}
                       data-testid={`remove-item-${item.productId}`}
-                      className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors"
+                      className="p-2 text-red-600 hover:bg-red-50 rounded-md transition-colors cart-item-remove"
+                      id={`cart-item-remove-${item.productId}`}
                     >
                       <Trash2 className="h-5 w-5" />
                     </button>
