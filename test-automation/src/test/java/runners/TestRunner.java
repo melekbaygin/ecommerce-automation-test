@@ -11,6 +11,7 @@ import org.junit.runner.RunWith;
             //"src/test/java/features/2-UrunListelemeveGoruntuleme.feature",
 //            "src/test/java/features/3-FiltrelemeIslemleri.feature",
             "src/test/java/features/4-SepetIslemleri.feature",
+            "src/test/java/features/5-ApiTestleri.feature",
     },
     plugin = {
         "pretty",
