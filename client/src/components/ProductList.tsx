@@ -28,6 +28,8 @@ const ProductList: React.FC<ProductListProps> = ({ products, title }) => {
               key={product.id} 
               product={product} 
               index={index}
+              data-testid={`product-card-${product.id}`}
+              id={`product-card-${product.id}`}
             />
           ))}
         </div>

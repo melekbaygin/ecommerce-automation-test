@@ -6,9 +6,11 @@ import { Product } from '../types';
 interface ProductCardProps {
   product: Product;
   index?: number;
+  id?: string;
+  ['data-testid']?: string;
 }
 
-const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
+const ProductCard: React.FC<ProductCardProps> = ({ product, index, id, ...rest }) => {
   const formatPrice = (price: number) => {
     return new Intl.NumberFormat('tr-TR', {
       style: 'currency',
@@ -27,6 +29,8 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
       className="bg-white rounded-xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden group"
       data-testid={`product-card-${product.id}`}
       data-product-id={product.id}
+      id={id}
+      {...rest}
     >
       <Link to={`/product/${product.id}`} className="block">
         <div className="relative overflow-hidden">
@@ -46,6 +50,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ product, index }) => {
           <h3 
             className="text-lg font-semibold text-gray-900 mb-2 line-clamp-2 group-hover:text-blue-600 transition-colors"
             data-testid={`product-name-${product.id}`}
+            id={`product-name-${product.id}`}
           >
             {product.name}
           </h3>

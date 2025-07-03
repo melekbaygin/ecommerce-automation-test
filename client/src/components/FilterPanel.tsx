@@ -195,6 +195,18 @@ const FilterContent: React.FC<FilterContentProps> = ({
           ))}
         </div>
       </div>
+
+      {/* Filtreleri Uygula Butonu (sadece masaüstü için) */}
+      <button
+        id="filter-apply-btn"
+        className="w-full mt-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors lg:block hidden"
+        type="button"
+        onClick={() => {
+          // Desktop için bir şey yapılmasına gerek yok, butonun varlığı yeterli
+        }}
+      >
+        Filtreleri Uygula
+      </button>
     </div>
   );
 };
