@@ -17,7 +17,7 @@ public class Hooks {
     @AfterStep
     public void takeScreenshotOnFailure(Scenario scenario) {
         if (scenario.isFailed()) {
-            WebDriver driver = DriverFactory.getDriver(System.getProperty("browser", "chrome"));
+            WebDriver driver = DriverFactory.getDriver();
 
             // 1. Cucumber raporuna ekle
             byte[] screenshotBytes = ((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES);
