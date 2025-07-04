@@ -8,10 +8,9 @@ import org.junit.runner.RunWith;
 @CucumberOptions(
     features = {
             "src/test/java/features/1-KullaniciGirisKontrol.feature",
-            //"src/test/java/features/2-UrunListelemeveGoruntuleme.feature",
-//            "src/test/java/features/3-FiltrelemeIslemleri.feature",
+            "src/test/java/features/2-UrunListelemeveGoruntuleme.feature",
             "src/test/java/features/4-SepetIslemleri.feature",
-            "src/test/java/features/5-ApiTestleri.feature",
+            "src/test/java/features/5-ApiTestleri.feature"
     },
     plugin = {
         "pretty",
@@ -21,8 +20,6 @@ import org.junit.runner.RunWith;
     },
         glue = {"steps","hooks"},
         monochrome = true
-//    snippets = CucumberOptions.SnippetType.CAMELCASE,
-//    tags = "@ui or @api"
 )
 public class TestRunner {
 
