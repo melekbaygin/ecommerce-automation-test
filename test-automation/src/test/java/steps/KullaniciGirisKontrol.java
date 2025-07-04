@@ -17,7 +17,7 @@ public class KullaniciGirisKontrol {
 
     @Given("Kullanıcı {string} adresindeki e-ticaret sitesini ziyaret eder")
     public void kullanıcı_adresindeki_e_ticaret_sitesini_ziyaret_eder(String url) {
-        driver = DriverFactory.getDriver(System.getProperty("browser", "chrome"));
+        driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
         driver.get(url);
         loginPace = new LoginPage(driver);

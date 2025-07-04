@@ -27,14 +27,14 @@ public class SepetIslemleri {
     private WebDriverWait wait;
 
     public void enDusukPuanliSaticiyiSepeteEkle() {
-        List<WebElement> saticilar = driver.findElements(By.className("satici"));
+        List<WebElement> saticilar = driver.findElements(By.cssSelector(".satici")); // Değiştirildi
 
         double minPuan = Double.MAX_VALUE;
         WebElement enDusukPuanliSatici = null;
 
         for (WebElement satici : saticilar) {
             try {
-                String puanText = satici.findElement(By.className("satici-puan")).getText();
+                String puanText = satici.findElement(By.cssSelector(".satici-puan span")).getText();
                 puanText = puanText.replaceAll("[^\\d.]", "");
                 double puan = Double.parseDouble(puanText);
 
@@ -42,18 +42,17 @@ public class SepetIslemleri {
                     minPuan = puan;
                     enDusukPuanliSatici = satici;
                 }
-            } catch (NoSuchElementException e) {
-                System.out.println("Puan bilgisi bulunamadi!");
+            } catch (NoSuchElementException | NumberFormatException e) {
+                System.out.println("Puan bilgisi okunamadi veya hatali format: " + e.getMessage());
             }
         }
 
         if (enDusukPuanliSatici != null) {
-            enDusukPuanliSatici.findElement(By.className("sepete-ekle-btn")).click();
+            enDusukPuanliSatici.findElement(By.cssSelector(".sepete-ekle-btn")).click();
         } else {
-            throw new RuntimeException("Satici bulunamadi!");
+            throw new RuntimeException("Sepete ekleyecek satıcı bulunamadı!");
         }
     }
-
 
     public boolean isProductInCart(String expectedProductName) {
         try {
@@ -73,7 +72,7 @@ public class SepetIslemleri {
 
     @Given("{string} e-ticaret sitesine gidilir")
     public void e_ticaret_sitesine_gidilir(String url) {
-        driver = DriverFactory.getDriver(System.getProperty("browser", "chrome"));
+        driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
         driver.get(url);
         searchResultsPage = new SearchResultsPage(driver);
@@ -117,11 +116,11 @@ public class SepetIslemleri {
     @When("En dusuk puanli saticinin urunu sepete eklenir")
     public void en_dusuk_puanli_saticinin_urunu_sepete_eklenir() {
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(15));
-        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.className("satici")));
+        wait.until(ExpectedConditions.presenceOfAllElementsLocatedBy(By.cssSelector("div[data-testid^='seller-option']")));
         enDusukPuanliSaticiyiSepeteEkle();
         searchResultsPage.setAddToCart();
-
     }
+
     @Then("Urunun sepete dogru eklendigi kontrol edilir")
     public void urunun_sepete_dogru_eklendigi_kontrol_edilir() {
         searchResultsPage.setCartLink();

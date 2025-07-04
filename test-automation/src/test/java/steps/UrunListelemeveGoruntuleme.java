@@ -15,7 +15,7 @@ public class UrunListelemeveGoruntuleme {
 
     @Given("Kullanıcı {string} sitesini ziyaret eder")
     public void kullanıcı_sitesini_ziyaret_eder(String url) {
-        driver = DriverFactory.getDriver(System.getProperty("browser", "chrome"));
+        driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
         driver.get(url);
         homePage = new HomePage(driver);
