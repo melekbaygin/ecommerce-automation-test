@@ -13,69 +13,18 @@ import pages.SearchResultsPage;
 import utilities.DriverFactory;
 
 import java.time.Duration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Set;
+
+import static org.junit.Assert.assertEquals;
 
 public class SepetIslemleri {
 
     private WebDriver driver;
     private SearchResultsPage searchResultsPage;
-
-//    public class ProductDetailSteps {
-//        WebDriver driver;
-//
-//        @Given("kullanıcı ürün detay sayfasında")
-//        public void kullanici_urun_detay_sayfasinda() {
-//            driver.get("http://localhost:3000/product/1"); // örnek ürün id
-//        }
-//
-//        @When("en düşük puanlı satıcıyı seçer ve sepete ekler")
-//        public void en_dusuk_puanli_saticiyi_secer_ve_sepete_ekler() {
-//            // Tüm satıcı kartlarını bul
-//            java.util.List<WebElement> sellers = driver.findElements(By.className("satici"));
-//
-//            double minRating = Double.MAX_VALUE;
-//            WebElement minSeller = null;
-//
-//            for (WebElement seller : sellers) {
-//                // Satıcı puanını bul
-//                WebElement ratingEl = seller.findElement(By.className("satici-puan")).findElement(By.tagName("span"));
-//                double rating = Double.parseDouble(ratingEl.getText().replace(",", "."));
-//                if (rating < minRating) {
-//                    minRating = rating;
-//                    minSeller = seller;
-//                }
-//            }
-//
-//            assertNotNull("En düşük puanlı satıcı bulunamadı!", minSeller);
-//
-//            // Satıcıyı seç (tıkla)
-//            minSeller.click();
-//
-//            // Sepete ekle butonunu bul ve tıkla
-//            WebElement addToCartBtn = minSeller.findElement(By.className("sepete-ekle-btn"));
-//            addToCartBtn.click();
-//
-//            // Sepete ekleme işleminin tamamlanmasını bekle (gerekirse)
-//            try {
-//                Thread.sleep(600); // setTimeout(500) ile uyumlu
-//            } catch (InterruptedException e) {}
-//        }
-//
-//        @Then("ürün sepete eklenmiş olmalı")
-//        public void urun_sepete_eklenmis_olmali() {
-//            // Sepet sayfasına git
-//            driver.get("http://localhost:3000/cart");
-//
-//            // Sepet ürünleri listesinin görünmesini bekle
-//            new WebDriverWait(driver, java.time.Duration.ofSeconds(5))
-//                    .until(ExpectedConditions.visibilityOfElementLocated(By.id("cart-items-list")));
-//
-//            // Sepette en az bir ürün olmalı
-//            java.util.List<WebElement> cartItems = driver.findElements(By.className("cart-item"));
-//            assertTrue("Sepette ürün yok!", cartItems.size() > 0);
-//        }
-//    }
+    private WebDriverWait wait;
 
     public void enDusukPuanliSaticiyiSepeteEkle() {
         List<WebElement> saticilar = driver.findElements(By.className("satici"));
@@ -180,7 +129,58 @@ public class SepetIslemleri {
                 .until(ExpectedConditions.visibilityOfElementLocated(By.id("cart-items-list")));
 
         String expectedProductName = "Huawei P60 Pro 256GB";
-        Assert.assertTrue("Ürün sepete eklenmedi!", isProductInCart(expectedProductName));
+        Assert.assertTrue("Urun sepete eklenmedi!", isProductInCart(expectedProductName));
     }
 
+    @When("Arama cubuguna {string} yazilir ve ara butonuna tiklanir")
+    public void arama_cubuguna_yazilir_ve_ara_butonuna_tiklanir(String productInput) {
+        searchResultsPage.setEnterProductInput(productInput);
+        searchResultsPage.setSearchButton();
+    }
+    @When("Urun detay sayfasina gidilir ve birinci satici secilip sepete eklenir")
+    public void urun_detay_sayfasina_gidilir_ve_birinci_satici_secilip_sepete_eklenir() {
+        searchResultsPage.setAddCartSamsungTelephone();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement firstSellerBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='seller-option-s4'] button")));
+        firstSellerBtn.click();
+    }
+    @When("Urun detay sayfasina gidilir ve ikinci satici secilip sepete eklenir")
+    public void urun_detay_sayfasina_gidilir_ve_ikinci_satici_secilip_sepete_eklenir() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement secondSellerBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='seller-option-s5'] button")));
+        secondSellerBtn.click();
+    }
+    @When("Urun detay sayfasina gidilir ve ucuncu satici secilip sepete eklenir")
+    public void urun_detay_sayfasina_gidilir_ve_ucuncu_satici_secilip_sepete_eklenir() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        WebElement thirdSellerBtn = wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("[data-testid='seller-option-s6'] button")));
+        thirdSellerBtn.click();
+    }
+
+    @When("Sepete gidilir")
+    public void sepete_gidilir() {
+        searchResultsPage.setCartLink();;
+    }
+    @Then("Sepette uc farkli saticinin listelendigi gozlemlenir")
+    public void sepette_uc_farkli_saticinin_listelendigi_gozlemlenir() {
+        // Satıcı bilgilerini bekle (ilk satıcıyı baz al)
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".cart-item-seller")));
+
+        // Tüm satıcı <p> elemanlarını al
+        List<WebElement> sellerElements = driver.findElements(By.cssSelector(".cart-item-seller"));
+
+        // Satıcı isimlerini ayıkla (örneğin "Satıcı: SamsungMağaza" -> "SamsungMağaza")
+        Set<String> uniqueSellers = new HashSet<>();
+        for (WebElement seller : sellerElements) {
+            String fullText = seller.getText().trim(); // "Satıcı: SamsungMağaza"
+            if (fullText.contains(":")) {
+                String[] parts = fullText.split(":");
+                if (parts.length > 1) {
+                    uniqueSellers.add(parts[1].trim());
+                }
+            }
+        }
+        Assert.assertEquals("Sepette 3 farkli satici bulunmuyor!", 3, uniqueSellers.size());
+}
 }

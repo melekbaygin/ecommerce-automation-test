@@ -12,7 +12,6 @@ import utilities.DriverFactory;
 public class UrunListelemeveGoruntuleme {
     private WebDriver driver;
     private HomePage homePage;
-    private LoginPage loginPage;
 
     @Given("Kullanıcı {string} sitesini ziyaret eder")
     public void kullanıcı_sitesini_ziyaret_eder(String url) {
@@ -44,7 +43,7 @@ public class UrunListelemeveGoruntuleme {
     }
     @Then("{string} mesajı görünür")
     public void mesajı_görünür(String information) {
-        String result = driver.findElement(new By.ByCssSelector("")).getText();
+        String result = driver.findElement(new By.ByCssSelector("p.text-gray-600.mt-1")).getText();
         result.contains("Hiç ürün bulunamadı.");
     }
 
