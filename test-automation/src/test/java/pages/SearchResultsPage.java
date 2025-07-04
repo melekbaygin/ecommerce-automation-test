@@ -30,6 +30,10 @@ public class SearchResultsPage extends BasePage {
     private final By clickRandomProduct = By.id("product-name-6");
     private final By cartLink = By.id("cart-link");
     private final By addToCart = By.id("add-to-cart-button");
+    private final By addCartSamsungTelephone = By.id("product-name-2");
+
+    private final By searchInput = By.id("search-input");
+    private final By searchButton = By.id("search-button");
 
     public SearchResultsPage(WebDriver driver) {
         super(driver);
@@ -134,5 +138,17 @@ public class SearchResultsPage extends BasePage {
     }
     public void setAddToCart() {
         click(addToCart);
+    }
+    public void setSearchInput() {
+        click(searchInput);
+    }
+    public void setSearchButton () {
+        click(searchButton);
+    }
+    public void setEnterProductInput (String productInput) {
+        type(searchInput, productInput);
+    }
+    public void setAddCartSamsungTelephone () {
+        click(addCartSamsungTelephone);
     }
 }
