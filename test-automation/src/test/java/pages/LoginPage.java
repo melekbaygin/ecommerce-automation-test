@@ -2,6 +2,7 @@ package pages;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.By;
+import config.Config;
 
 public class LoginPage extends BasePage {
     private final By emailInput = By.id("email");
@@ -13,7 +14,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
-        this.url = "http://localhost:5173";
+        this.url = Config.APP_URL;
     }
 
     public void clickLoginLink() {

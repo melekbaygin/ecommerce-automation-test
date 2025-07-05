@@ -1,5 +1,6 @@
 package pages;
 
+import config.Config;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -10,7 +11,7 @@ public class HomePage extends BasePage {
 
     public HomePage(WebDriver driver) {
         super(driver);
-        this.url = "http://localhost:5173";
+        this.url = Config.APP_URL;
     }
 
     public void setSearchInput() {
