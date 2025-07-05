@@ -1,0 +1,62 @@
+version: '3.8'
+
+services:
+  mock-server:
+    build:
+      context: ./test-automation
+      dockerfile: Dockerfile
+    container_name: mock-server
+    ports:
+      - "8080:8080"
+    # command: mvn compile exec:java -Dexec.mainClass="ApiMockServer"
+    command: mvn compile exec:java -Dexec.mainClass="ApiMockServer"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+
+  ecommerce-app:
+    container_name: ecommerce-app
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173"
+    working_dir: /app
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    command: npm run dev -- --host 0.0.0.0
+    healthcheck:
+      test: ["CMD-SHELL", "curl --fail --silent --show-error http://localhost:5173/ || exit 1"]
+      interval: 10s
+      timeout: 10s
+      retries: 20
+      start_period: 90s
+    restart: unless-stopped
+
+  test-runner:
+    build:
+      context: ./test-automation
+      dockerfile: Dockerfile
+    container_name: test-runner
+    environment:
+      BROWSER: chrome
+      MOCK_API_URL: http://mock-server:8080
+      APP_URL: http://ecommerce-app:5173
+      DISPLAY: host.docker.internal:0
+      HEADLESS: "true"
+    volumes:
+      - ./test-automation:/app
+      - ./test-automation/target/allure-results:/app/target/allure-results
+      - ./test-automation/screenshots:/app/screenshots
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    depends_on:
+      mock-server:
+        condition: service_healthy
+      ecommerce-app:
+        condition: service_healthy
+    command: mvn test
