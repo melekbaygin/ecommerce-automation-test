@@ -51,5 +51,14 @@ echo "🔍 Testler çalıştırılıyor..."
 if ! mvn test -Dbrowser="$BROWSER"; then
     echo "⚠️ Testler tamamlandı. Detaylı sonuçlar:"
     echo "📄 $TEST_RUNNER_DIR/target/cucumber-reports/cucumber-html-report.html"
+    if command -v xdg-open > /dev/null; then
+        xdg-open "$TEST_RUNNER_DIR/target/cucumber-reports/cucumber-html-report.html"
+    elif command -v open > /dev/null; then
+        open "$TEST_RUNNER_DIR/target/cucumber-reports/cucumber-html-report.html"
+    elif command -v start > /dev/null; then
+        start "$TEST_RUNNER_DIR/target/cucumber-reports/cucumber-html-report.html"
+    else
+        echo "Raporu otomatik açmak için uygun bir komut bulunamadı."
+    fi
 fi
 
