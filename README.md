@@ -68,6 +68,7 @@ Test çalıştıktan sonra sonuç raporu otomatik olarak şu dizine üretilir:
 ```bash
 test-automation/target/cucumber-reports/cucumber-html-report.html
 ```
+Başarısız olan test senaryolarının ekran görüntüleri ise `test-automation/target/screenshots` dizini altında bulunur.
 
 ---
 
