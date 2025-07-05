@@ -68,3 +68,50 @@ Test çalıştıktan sonra sonuç raporu otomatik olarak şu dizine üretilir:
 ```bash
 test-automation/target/cucumber-reports/cucumber-html-report.html
 ```
+
+---
+
+## 🐳 Docker ile Çalıştırma
+
+Proje, Docker Compose kullanılarak da çalıştırılabilir. Bu yöntem, tüm bağımlılıkları (web uygulaması, mock sunucu ve test çalıştırıcı) izole edilmiş Docker ortamlarında yönetmenizi sağlar.
+
+### 🚀 1. Docker Gereksinimleri
+
+Sisteminizde Docker ve Docker Compose'un kurulu olması gerekir:
+
+- [Docker Desktop](https://www.docker.com/products/docker-desktop/) (Windows/macOS için)
+- Linux için [Docker Engine](https://docs.docker.com/engine/install/) ve [Docker Compose](https://docs.docker.com/compose/install/)
+
+### 🛠️ 2. Docker Compose ile Başlatma
+
+Projenin kök dizininde `docker-compose.yml` dosyası bulunmaktadır. Bu dosya aşağıdaki servisleri tanımlar:
+
+- `mock-server`: WireMock tabanlı mock API sunucusu. Port: `8080`
+- `ecommerce-app`: React tabanlı e-ticaret web uygulaması. Port: `5173`
+- `test-runner`: Selenium + Cucumber testlerini çalıştıran servis. Bu servis, `mock-server` ve `ecommerce-app` servisleri sağlıklı duruma geldikten sonra otomatik olarak testleri başlatır.
+
+Tüm servisleri başlatmak ve testleri çalıştırmak için projenin kök dizininde aşağıdaki komutu kullanın:
+
+```bash
+docker-compose up --build
+```
+
+Bu komut, Docker imajlarını oluşturacak (ilk çalıştırmada) ve tüm servisleri başlatacaktır. Testler tamamlandıktan sonra servisler çalışmaya devam edecektir.
+
+### 🛑 3. Servisleri Durdurma
+
+Çalışan Docker servislerini durdurmak ve kaldırmak için aşağıdaki komutu kullanın:
+
+```bash
+docker-compose down
+```
+
+### 📄 Test Raporu (Docker)
+
+Docker Compose ile testler çalıştırıldıktan sonra, test raporları yerel makinenizdeki şu dizine kaydedilir:
+
+```bash
+test-automation/target/allure-results
+```
+
+Bu raporları görüntülemek için Allure Report aracını kullanabilirsiniz.
