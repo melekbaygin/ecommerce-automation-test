@@ -9,6 +9,8 @@ import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
+import java.util.UUID;
+
 public class DriverFactory {
     public static WebDriver getDriver() {
         // Tarayıcı adı dışarıdan alınır, default olarak "edge"
@@ -19,6 +21,22 @@ public class DriverFactory {
             case "chrome":
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions chromeOptions = new ChromeOptions();
+                chromeOptions.addArguments("--no-sandbox");
+                chromeOptions.addArguments("--disable-dev-shm-usage");
+                chromeOptions.addArguments("--disable-gpu");
+
+                // Headless mode opsiyonunu ortam değişkeninden al
+                String headlessEnv = System.getenv("HEADLESS");
+                boolean isHeadless = headlessEnv != null && headlessEnv.equalsIgnoreCase("true");
+                if (isHeadless) {
+                    chromeOptions.addArguments("--headless=new");
+                }
+
+                // İsteğe bağlı: user-data-dir parametresi sadece headless değilse eklenebilir
+                if (!isHeadless) {
+                    String uniqueUserDataDir = "/tmp/chrome_user_data_" + UUID.randomUUID();
+                    chromeOptions.addArguments("--user-data-dir=" + uniqueUserDataDir);
+                }
                 driver = new ChromeDriver(chromeOptions);
                 break;
 
