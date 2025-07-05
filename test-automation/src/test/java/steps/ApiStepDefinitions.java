@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class ApiStepDefinitions {
-    private APIClient apiClient = new APIClient("http://localhost:8080");
+    private APIClient apiClient = new APIClient(System.getenv("MOCK_API_URL") != null ? System.getenv("MOCK_API_URL") : "http://localhost:8080");
     private String actualToken;
     private Response invoiceViewResponse;
     private Response invoiceSendResponse;

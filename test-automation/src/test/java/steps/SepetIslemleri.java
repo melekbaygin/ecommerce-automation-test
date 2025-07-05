@@ -74,7 +74,7 @@ public class SepetIslemleri {
     public void e_ticaret_sitesine_gidilir(String url) {
         driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
-        driver.get(url);
+        driver.get(config.Config.APP_URL);
         searchResultsPage = new SearchResultsPage(driver);
     }
 

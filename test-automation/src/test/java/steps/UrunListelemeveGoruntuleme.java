@@ -17,7 +17,7 @@ public class UrunListelemeveGoruntuleme {
     public void kullanıcı_sitesini_ziyaret_eder(String url) {
         driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
-        driver.get(url);
+        driver.get(config.Config.APP_URL);
         homePage = new HomePage(driver);
     }
     @When("Arama çubuğuna tıklanır")

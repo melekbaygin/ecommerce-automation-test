@@ -19,7 +19,7 @@ public class KullaniciGirisKontrol {
     public void kullanıcı_adresindeki_e_ticaret_sitesini_ziyaret_eder(String url) {
         driver = DriverFactory.getDriver();
         driver.manage().window().maximize();
-        driver.get(url);
+        driver.get(config.Config.APP_URL);
         loginPace = new LoginPage(driver);
     }
     @When("Kullanıcı Giriş Yap butonuna tıklar")
