@@ -14,6 +14,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Hooks {
+
     @AfterStep
     public void takeScreenshotOnFailure(Scenario scenario) {
         if (scenario.isFailed()) {
@@ -35,5 +36,10 @@ public class Hooks {
                 System.err.println("Screenshot kaydedilirken hata oluştu: " + e.getMessage());
             }
         }
+    }
+
+    @io.cucumber.java.After
+    public void tearDown() {
+        DriverFactory.quitDriver();
     }
 }
