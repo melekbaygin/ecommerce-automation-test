@@ -4,6 +4,13 @@ Bu proje, örnek bir e-ticaret web sitesi için geliştirilmiş bir test otomasy
 
 ---
 
+## Ekran Goruntusu
+
+https://github.com/user-attachments/assets/d1d8e066-ec25-4984-b7a0-651999342178
+
+
+---
+
 ## 🧰 Kullanılan Teknolojiler
 
 - Java 22
