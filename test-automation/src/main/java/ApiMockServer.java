@@ -10,6 +10,13 @@ public class ApiMockServer {
         wireMockServer.start();
         System.out.println("WireMock sunucusu 8080 portunda baslatildi.");
 
+        // ---------- Health Check Endpoint: / (GET) ----------
+        wireMockServer.stubFor(get(urlEqualTo("/"))
+            .willReturn(aResponse()
+                .withStatus(200)
+                .withBody("Mock server is running")));
+        System.out.println("Health check endpoint '/' yapilandirildi.");
+
         // ---------- 1. Endpoint: /token (POST) ----------
         wireMockServer.stubFor(post(urlEqualTo("/token"))
             .withHeader("user", equalTo("testUser"))
