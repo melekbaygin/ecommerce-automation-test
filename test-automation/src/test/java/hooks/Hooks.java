@@ -1,5 +1,6 @@
 package hooks;
 
+import io.cucumber.java.After;
 import io.cucumber.java.AfterStep;
 import io.cucumber.java.Scenario;
 import org.openqa.selenium.OutputType;
@@ -35,5 +36,9 @@ public class Hooks {
                 System.err.println("Screenshot kaydedilirken hata oluştu: " + e.getMessage());
             }
         }
+    }
+    @After
+    public void tearDown() {
+        DriverFactory.closeDriver();
     }
 }
