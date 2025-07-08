@@ -12,50 +12,62 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import java.util.UUID;
 
 public class DriverFactory {
+
+    private static ThreadLocal<WebDriver> driverThread = new ThreadLocal<>();
+
     public static WebDriver getDriver() {
-        // Tarayıcı adı dışarıdan alınır, default olarak "edge"
-        String browserName = System.getProperty("browser", "chrome").toLowerCase();
-        WebDriver driver;
+        if (driverThread.get() == null) {
+            // Tarayıcı adı dışarıdan alınır, default olarak "edge"
+            String browserName = System.getProperty("browser", "chrome").toLowerCase();
+            WebDriver driver;
 
-        switch (browserName) {
-            case "chrome":
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions chromeOptions = new ChromeOptions();
-                chromeOptions.addArguments("--no-sandbox");
-                chromeOptions.addArguments("--disable-dev-shm-usage");
-                chromeOptions.addArguments("--disable-gpu");
+            switch (browserName) {
+                case "chrome":
+                    WebDriverManager.chromedriver().setup();
+                    ChromeOptions chromeOptions = new ChromeOptions();
+                    chromeOptions.addArguments("--no-sandbox");
+                    chromeOptions.addArguments("--disable-dev-shm-usage");
+                    chromeOptions.addArguments("--disable-gpu");
 
-                // Headless mode opsiyonunu ortam değişkeninden al
-                String headlessEnv = System.getenv("HEADLESS");
-                boolean isHeadless = headlessEnv != null && headlessEnv.equalsIgnoreCase("true");
-                if (isHeadless) {
-                    chromeOptions.addArguments("--headless=new");
-                }
+                    // Headless mode opsiyonunu ortam değişkeninden al
+                    String headlessEnv = System.getenv("HEADLESS");
+                    boolean isHeadless = headlessEnv != null && headlessEnv.equalsIgnoreCase("true");
+                    if (isHeadless) {
+                        chromeOptions.addArguments("--headless=new");
+                    }
 
-                // İsteğe bağlı: user-data-dir parametresi sadece headless değilse eklenebilir
-                if (!isHeadless) {
-                    String uniqueUserDataDir = "/tmp/chrome_user_data_" + UUID.randomUUID();
-                    chromeOptions.addArguments("--user-data-dir=" + uniqueUserDataDir);
-                }
-                driver = new ChromeDriver(chromeOptions);
-                break;
+                    // İsteğe bağlı: user-data-dir parametresi sadece headless değilse eklenebilir
+                    if (!isHeadless) {
+                        String uniqueUserDataDir = "/tmp/chrome_user_data_" + UUID.randomUUID();
+                        chromeOptions.addArguments("--user-data-dir=" + uniqueUserDataDir);
+                    }
+                    driver = new ChromeDriver(chromeOptions);
+                    break;
 
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                FirefoxOptions firefoxOptions = new FirefoxOptions();
-                driver = new FirefoxDriver(firefoxOptions);
-                break;
+                case "firefox":
+                    WebDriverManager.firefoxdriver().setup();
+                    FirefoxOptions firefoxOptions = new FirefoxOptions();
+                    driver = new FirefoxDriver(firefoxOptions);
+                    break;
 
-            case "edge":
-                WebDriverManager.edgedriver().setup();
-                EdgeOptions edgeOptions = new EdgeOptions();
-                driver = new EdgeDriver(edgeOptions);
-                break;
+                case "edge":
+                    WebDriverManager.edgedriver().setup();
+                    EdgeOptions edgeOptions = new EdgeOptions();
+                    driver = new EdgeDriver(edgeOptions);
+                    break;
 
-            default:
-                throw new IllegalArgumentException("Unsupported browser: " + browserName);
+                default:
+                    throw new IllegalArgumentException("Unsupported browser: " + browserName);
+            }
+            driverThread.set(driver);
         }
+        return driverThread.get();
+    }
 
-        return driver;
+    public static void closeDriver() {
+        if (driverThread.get() != null) {
+            driverThread.get().quit();
+            driverThread.remove();
+        }
     }
 }
